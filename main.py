@@ -1,6 +1,7 @@
 from stats import count_words
 from stats import count_chars
 from stats import sort_results
+import sys
 
 def get_book_text(relative_path):
     file_contents = ""
@@ -9,8 +10,13 @@ def get_book_text(relative_path):
     return file_contents
 
 def main():
+    args = sys.argv
+    if len(args) < 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    relative_path = args[1]
     print("============ BOOKBOT ============")
-    relative_path = "books/frankenstein.txt"
+    # relative_path = "books/frankenstein.txt"
     file_contents = get_book_text(relative_path)
     print(f"Analyzing book found at {relative_path}...")
     print("----------- Word Count ----------")
