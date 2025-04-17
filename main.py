@@ -1,20 +1,32 @@
+from stats import count_words
+from stats import count_chars
+from stats import sort_results
+
 def get_book_text(relative_path):
     file_contents = ""
     with open(relative_path) as f:
         file_contents = f.read()
     return file_contents
 
-
-def count_words(contents):
-    split_words = contents.split()
-    return len(split_words)
-
-
 def main():
-    file_contents = get_book_text("books/frankenstein.txt")
-    # print(file_contents)
+    print("============ BOOKBOT ============")
+    relative_path = "books/frankenstein.txt"
+    file_contents = get_book_text(relative_path)
+    print(f"Analyzing book found at {relative_path}...")
+    print("----------- Word Count ----------")
     word_count = count_words(file_contents)
-    print(f"{word_count} words found in the document")
+    print(f"Found {word_count} total words")
 
+    print("--------- Character Count -------")
+    char_count = count_chars(file_contents)
+    # print(char_count)
+    sorted_results = sort_results(char_count)
+    # print(sorted_results)
+    for result in sorted_results:
+        char = result["char"]
+        count = result["count"]
+        if char.isalpha() == True:
+            print(f"{char}: {count}")
+    print("============= END ===============")
 
 main()
